@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import DashLayout from "./dashboard/DashLayout";
+import Layout from './web/Layout'
+import { AppRoutes } from "./AppRoutes";
+import { v4 as uniqueHash } from 'uuid'
 function App() {
+  const uniqueId = uniqueHash()
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <Routes>
+          {
+            AppRoutes.map(({ web }) => {
+              return web.map(({ pathname, component }) => {
+                return <Route path={pathname} element={<Layout>{component}</Layout>} key={uniqueId} />
+              })
+            })
+          }
+          <Route path="/dashboard" element={<DashLayout />}>
+            {
+              AppRoutes.map(({ admin }) => {
+                return admin.map(({ nestedPath, component }) => {
+                  return <Route path={nestedPath} element={component} key={uniqueId} />
+                })
+              })
+            }
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 

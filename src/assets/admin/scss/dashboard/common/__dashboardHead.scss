@@ -1,0 +1,41 @@
+.dashboard_head {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: #030f1f;
+    height: 4em;
+
+    .profile {
+        position: relative;
+        cursor: pointer;
+
+        &:hover .dropdown {
+            display: block;
+        }
+
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #fff;
+            margin: 0em 1em 0 0;
+            display: none;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+            width: 200px;
+            border-radius: 4px;
+        }
+
+        .username {
+            background: #fff;
+            border-radius: 50%;
+            height: 35px;
+            width: 35px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            font-weight: 600;
+            margin-right: 1em;
+        }
+    }
+}
